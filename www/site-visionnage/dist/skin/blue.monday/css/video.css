@@ -1,0 +1,17 @@
+#jp_container_1
+{
+  margin-left: auto;
+  margin-right: auto;
+}
+#annot{
+  display: block;
+  margin :10px auto auto auto;
+
+}
+#image{
+  width:100px;
+}
+#succes
+{
+  	text-align: center;
+}
