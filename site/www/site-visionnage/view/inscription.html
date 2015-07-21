@@ -1,0 +1,94 @@
+<div class="container" id="inscription">
+	<form action="" method= "post" >
+		<div class="row text-center"id="titre">
+			<div class="span6 offset3" >
+				<h1>Inscription</h1>
+				<h2>Merci de renseigner vos informations</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-offset-2 col-md-3">
+				<div class="form-group">
+					<label for="pseudo">Pseudo</label>
+					<input type="text" class="form-control" name="pseudo" placeholder="pseudo" required autofocus>
+				</div>
+			</div>
+			<div class="col-md-offset-1 col-md-4">
+				<div class="form-group">
+					<label for="Email">Email address</label>
+					<input type="text" class="form-control" name="email" placeholder="Enter email" required>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-3">
+				<div class="form-group">
+					<label for="Nom">Age</label> 
+					<input type="text" class="form-control" name="age" placeholder="age" required> ans
+				</div>
+			</div>
+			<div class="col-md-offset-1 col-md-3">
+				<label for="age">Sexe</label>
+				<div class="radio">
+	              <label>
+	                <input name="sexe" type="radio" value="F">
+	                Femme
+	              </label>
+	              <label>
+	                <input name="sexe" type="radio" value="H">
+	                Homme
+	              </label>
+           		 </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-offset-2 col-md-3">
+				<div class="form-group">
+					<label for="sel1">Catégorie sociaux professionnelle</label>
+				      <select name="cat_soc_prof" class="form-control" id="sel1">
+				        <option value="1">1</option>
+				        <option>2</option>
+				        <option>3</option>
+				        <option>4</option>
+				      </select>
+				</div>
+			</div>
+			<div class="col-md-offset-1 col-md-3">
+				<div class="form-group">
+					<label for="sel1">Niveau d'étude</label>
+				      <select name="niv_etude"class="form-control" id="sel1">
+				        <option value="1">1</option>
+				        <option>2</option>
+				        <option>3</option>
+				        <option>4</option>
+				      </select>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-md-offset-2 col-md-3">
+				<div class="form-group">
+					<label for="Password">Mot de passe</label>
+					<input type="password" class="form-control" name="password" placeholder="Mot de passe" required>
+				</div>
+			</div>
+			<div class="col-md-offset-1 col-md-3">
+				<div class="form-group">
+					<label for="Vpassword">Vérification mot de passe</label>
+					<input type="password" class="form-control" name="vpassword" placeholder="Vérification mot de passe" required>
+				</div>
+			</div>
+		</div>
+
+		<br/>
+		<div class="row">
+			<div class="col-md-offset-5 col-md-1">
+				<button type="submit" class="btn btn-primary">Envoyer mes informations</button>
+			</div>
+		</div>
+	</form>
+	<div id = "etat"><?php echo $flash['etat_co'];?></div>
+</div>

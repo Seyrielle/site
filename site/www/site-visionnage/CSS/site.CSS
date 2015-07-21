@@ -1,0 +1,216 @@
+/*accueil*/
+#etat{
+	color: red;
+	text-align: center;
+}
+#titre
+{
+	background-color: lightgreen;
+	height: 150px;
+	margin-bottom: 50px;
+	margin-top: 50px;
+}
+.form-signin
+{
+max-width: 330px;
+padding: 15px;
+margin: 0 auto;
+}
+.form-signin .form-signin-heading, .form-signin .checkbox
+{
+margin-bottom: 10px;
+}
+.form-signin .checkbox
+{
+font-weight: normal;
+}
+.form-signin .form-control
+{
+position: relative;
+font-size: 16px;
+height: auto;
+padding: 10px;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+.form-signin .form-control:focus
+{
+z-index: 2;
+}
+.form-signin input[type="text"]
+{
+margin-bottom: -1px;
+border-bottom-left-radius: 0;
+border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"]
+{
+margin-bottom: 10px;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
+}
+.account-wall
+{
+margin-top: 20px;
+padding: 20px 0px 20px 0px;
+background-color: #f7f7f7;
+-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.login-title
+{
+color: #555;
+font-size: 18px;
+font-weight: 400;
+display: block;
+}
+.new-account
+{
+display: block;
+margin-top: 10px;
+} 
+
+/*inscription*/
+
+.form-group{
+  margin-bottom: 40px;
+}
+
+/*infoCo*/
+#info
+{
+  position : absolute;
+  font-size: 15px;
+  background-color: #7DCD7D;
+  border:2px solid #228B22 ;
+  width:350px;
+  height:100px;
+  float : right;
+}
+#deconnexion{
+  color:blue;
+}
+
+/*consigne*/
+
+/*menu*/
+
+ul{
+
+  list-style: none;
+}
+#breadcrumbs-two{
+  overflow: hidden;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+#breadcrumbs-two li{
+  float: left;
+  margin: 0 2em 0 2em;
+}
+
+#breadcrumbs-two a{
+  background: #ddd;
+  padding: 1em 1.3em;
+  float: left;
+  text-decoration: none;
+  color: #444;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5); 
+  position: relative;
+}
+
+#breadcrumbs-two a::before{
+  content: "";
+  position: absolute;
+  top: 50%; 
+  margin-top: -2.5em;   
+  border-width: 2.5em 0 2.5em 2em;
+  border-style: solid;
+  border-color: #ddd #ddd #ddd transparent;
+  left: -2em;
+}
+
+#breadcrumbs-two a::after{
+  content: "";
+  position: absolute;
+  top: 50%; 
+  margin-top: -2.5em;   
+  border-top: 2.5em solid transparent;
+  border-bottom: 2.5em solid transparent;
+  border-left: 2em solid #ddd;
+  right: -2em;
+}
+
+
+#breadcrumbs-two .before,
+#breadcrumbs-two .before::before,
+#breadcrumbs-two .before::after
+{
+  color: green;
+}
+#breadcrumbs-two a:hover{
+  color : #444;
+  background-color : #99db76;
+}
+#breadcrumbs-two .before:hover::after{
+  border-left-color: #99db76;
+}
+#breadcrumbs-two .before:hover::before{
+  border-color: #99db76 #99db76 #99db76 transparent;
+}
+#breadcrumbs-two .after,
+#breadcrumbs-two .after::before,
+#breadcrumbs-two .after::after{
+  color :#8B0000;
+}
+#breadcrumbs-two .after:hover{
+  color : #444;
+  background: #FC5D5D;
+}
+#breadcrumbs-two .after:hover::after{
+  border-left-color: #FC5D5D;
+}
+#breadcrumbs-two .after:hover::before{
+  border-color: #FC5D5D #FC5D5D #FC5D5D transparent;
+}
+#breadcrumbs-two .current,
+#breadcrumbs-two .current:hover{
+  color: green;
+  font-weight: bold;
+  background: transparent;
+}
+
+#breadcrumbs-two .current::after,
+#breadcrumbs-two .current::before{
+  content: normal;
+}
+#breadcrumbs-two .blocked,
+#breadcrumbs-two .blocked::after,
+#breadcrumbs-two .blocked::before{
+
+  cursor: not-allowed;
+}
+#breadcrumbs-two .blocked:hover{
+  color : #8B0000;
+  background: #ddd;
+}
+#breadcrumbs-two .blocked:hover::after{
+  border-left-color: #ddd;
+}
+#breadcrumbs-two .blocked:hover::before{
+  border-color: #ddd #ddd #ddd transparent;
+}
+
+/*remerciements*/
+
+#partage{
+  position : absolute;
+  font-size: 15px;
+  background-color: #7DCD7D;
+  border:2px solid #228B22 ;
+  width:350px;
+  height:100px;
+}
