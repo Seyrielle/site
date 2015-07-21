@@ -1,24 +1,75 @@
 <?php
-
+//require
 	require 'vendor/autoload.php';
+	require 'controller/controllerPages.php';
+	require 'controller/controllerUser.php';
+	require 'controller/controllerQuestionnaire.php';
+	//require 'controller/controllervideo.php';
+	include 'config/database.php'; 
+
 session_start();
 
+//Slim
 	$app = new \Slim\Slim([
 		'templates.path' => 'view'
 	]);
+	$app -> controllerPages = new ControllerPages($app);
+	$app -> controllerUser = new ControllerUser($app);
+	$app -> controllerQuestionnaire = new controllerQuestionnaire($app);
 
+//root
 	$app->get('/', function () use ($app){
-	    $app->render('body.php',compact('app'));  
-	})-> name('body');
+		$app -> controllerPages-> accueil();
+	})-> name('accueil');
 
-	$app->get('/contact', function () use ($app){
-		$name = "hyvan";
-	    $app->render('contact.php',compact('name'));
-	    $app->flash('success','Bravo!');
-	    $app->redirect($app->urlFor('body'));
-	})->name('contact');
+	$app->get('/consigne', function () use ($app){
+		$app -> controllerPages-> consigne();
+	})-> name('consigne');
 
-	$app->render('header.php');
+	$app->get('/inscription', function () use ($app){
+		$app -> controllerPages-> inscription();
+	})-> name('inscription');
+
+	$app->get('/visionnage', function () use ($app){
+		$app -> controllerPages-> visionnage();
+	})-> name('visionnage');
+
+	$app->get('/questionnaire', function () use ($app){
+		$app -> controllerPages-> questionnaire();
+	})-> name('questionnaire');
+
+	$app->get('/remerciement', function () use ($app){
+		$app -> controllerPages-> remerciement();
+	})-> name('remerciement');
+
+	$app->get('/deconnexion', function () use ($app){
+		$app -> controllerUser-> deconnexion();
+	})-> name('deconnexion');
+
+	$app->post("/", function () use ($app){
+    	$pseudo = $app->request->post('pseudo');
+    	$password = $app->request->post('password');
+		$app -> controllerUser -> connexion($password,$pseudo);
+	}) -> name('connexion');
+
+	$app->post('/annot', function() use ($app) {
+       $req = $app->request();
+       echo json_encode($req->post('nom'));
+
+    });
+
+	$app->post("/inscription", function () use ($app){
+    	$insc = $app->request->post();
+		$app -> controllerUser -> inscription($insc);
+	});
+
+	$app->post("/questionnaire", function () use ($app){
+    	$info = $app->request->post();
+    	$_SESSION['page'] = 1;
+		$app -> controllerQuestionnaire -> envoyerReponse($info);
+	});
+
+// execution Slim
+	$app -> render('header.html');
 	$app -> run();
-	$app->render('footer.php');
 ?>
