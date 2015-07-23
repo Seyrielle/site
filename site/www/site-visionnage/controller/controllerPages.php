@@ -51,7 +51,7 @@
 		}
 		function inscription(){
 			if (!$this->estConnecte()){
-				$this->app->render('inscription.php',array('app' => $this->app));
+				$this->app->render('inscription.html',array('app' => $this->app));
 			}
 			else{
 				$this->changementPage($this->nomPage($_SESSION['page']));

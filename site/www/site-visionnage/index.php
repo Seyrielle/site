@@ -1,4 +1,8 @@
 <?php
+//namespace Slim\Slim;
+session_start();
+
+
 //require
 	require 'vendor/autoload.php';
 	require 'controller/controllerPages.php';
@@ -7,12 +11,13 @@
 	//require 'controller/controllervideo.php';
 	include 'config/database.php'; 
 
-session_start();
+
 
 //Slim
-	$app = new \Slim\Slim([
-		'templates.path' => 'view'
-	]);
+
+	$tab = array('templates.path' => 'view');
+
+	$app = new \Slim\Slim($tab);
 	$app -> controllerPages = new ControllerPages($app);
 	$app -> controllerUser = new ControllerUser($app);
 	$app -> controllerQuestionnaire = new controllerQuestionnaire($app);
