@@ -8,7 +8,8 @@ session_start();
 	require 'controller/controllerPages.php';
 	require 'controller/controllerUser.php';
 	require 'controller/controllerQuestionnaire.php';
-	//require 'controller/controllervideo.php';
+	require 'controller/controllerVideo.php';
+	require 'controller/controllerAnnot.php';
 	include 'config/database.php'; 
 
 
@@ -18,10 +19,11 @@ session_start();
 	$tab = array('templates.path' => 'view');
 
 	$app = new \Slim\Slim($tab);
-	$app -> controllerPages = new ControllerPages($app);
+	$app -> controllerPages = new ControllerPages($app,$app->controllerUser);
 	$app -> controllerUser = new ControllerUser($app);
 	$app -> controllerQuestionnaire = new controllerQuestionnaire($app);
-
+	$app -> controllerAnnot = new ControllerAnnot($app);
+	$app -> controllerVideo = new ControllerVideo($app);
 //root
 	$app->get('/', function () use ($app){
 		$app -> controllerPages-> accueil();
@@ -51,6 +53,10 @@ session_start();
 		$app -> controllerUser-> deconnexion();
 	})-> name('deconnexion');
 
+	$app->get('/fin', function () use ($app){
+		$app -> controllePages-> fin();
+	})-> name('fin');
+
 	$app->post("/", function () use ($app){
     	$pseudo = $app->request->post('pseudo');
     	$password = $app->request->post('password');
@@ -59,12 +65,12 @@ session_start();
 
 	$app->post('/annot', function() use ($app) {
        $req = $app->request();
-       echo json_encode($req->post('nom'));
-
+       $app -> controllerAnnot -> envoyerAnnot($req);
     });
 
 	$app->post("/inscription", function () use ($app){
     	$insc = $app->request->post();
+    	$app -> controllerVideo -> newVideo();
 		$app -> controllerUser -> inscription($insc);
 	});
 
@@ -78,3 +84,4 @@ session_start();
 	$app -> render('header.html');
 	$app -> run();
 ?>
+

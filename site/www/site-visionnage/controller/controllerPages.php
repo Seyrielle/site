@@ -1,10 +1,11 @@
 <?php
 	class ControllerPages{
 		private $app;
-		private $accueil;
+		private $var;
 		public function __construct($app){
 
 			$this->app = $app;
+			$this->var = array('app' => $app);
 		}
 		function nomPage($numPage){
 			switch($numPage){
@@ -12,6 +13,7 @@
 				case 2: return "visionnage";
 				case 3: return "questionnaire";
 				case 4: return "remerciement";
+				case 5: return "fin";
 			}
 		}
 		function estConnecte(){
@@ -29,7 +31,8 @@
 					}
 					else{
 						$_SESSION['page']=$numPage;
-						$this->app->render($this->nomPage($numPage).".html",array('app' => $this->app));
+						$this->app->controllerUser->saveNumPage();
+						$this->app->render($this->nomPage($numPage).".html",$this->var);
 					}
 				}
 				else{
@@ -48,6 +51,7 @@
 		}
 		function consigne(){
 			$this->changementPage(1);
+
 		}
 		function inscription(){
 			if (!$this->estConnecte()){
@@ -58,6 +62,9 @@
 			}
 		}
 		function visionnage(){
+			if ($this->estConnecte()){
+				$this->var = array('app'=>$this->app,'url'=>$this->app->controllerVideo->urlVideo(),'annot'=>$this->app->controllerAnnot->listeAnnot());				
+			}
 			$this->changementPage(2);
 		}
 		function questionnaire(){
@@ -65,6 +72,9 @@
 		}
 		function remerciement(){
 			$this->changementPage(4);
+		}
+		function fin(){
+			$this->changementPage(5);
 		}
 	}
 

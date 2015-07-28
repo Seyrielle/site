@@ -214,3 +214,39 @@ ul{
   width:350px;
   height:100px;
 }
+
+/*visionnage*/
+.btn{
+  margin : 5px;
+}
+#video{
+  float : left;
+}
+#bouton{
+  position : relative; 
+  font-size: 15px;
+  border:2px solid #DCDCDC ;
+  width:390px;
+  height:200px;
+  float : right;
+}
+.liste_annot{
+  margin-top: 50px;
+  position : relative;
+  float : right;
+}
+.table-fixed thead {
+  width: 97%;
+}
+.table-fixed tbody {
+  height: 230px;
+  overflow-y: auto;
+  width: 100%;
+}
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td, .table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
