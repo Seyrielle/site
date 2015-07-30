@@ -207,12 +207,13 @@ ul{
 /*remerciements*/
 
 #partage{
-  position : absolute;
+
+  margin : auto;
   font-size: 15px;
   background-color: #7DCD7D;
   border:2px solid #228B22 ;
-  width:350px;
-  height:100px;
+  width:300px;
+  height:80px;
 }
 
 /*visionnage*/

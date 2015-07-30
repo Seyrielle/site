@@ -47,9 +47,25 @@
 		({
 		    type: "POST",
 			data: '&nom='+ nom +'&currentTime=' + currentTime,
-		    url: "http://localhost/site-visionnage/annot",
+		    url: "http://localhost/site-visionnage/ajoutAnnot",
 		    success: function(response) {
-		    		$('tbody').append("<tr><td>"+nom+"</td><td>"+currentTime+"</td><td><bouton>supprimé</bouton></td></tr>");
+		    		$('tbody').append("<tr ><td class='col-xs-4'>"+nom+"</td><td class='col-xs-4'>"+currentTime+"</td><td class='col-xs-4'><bouton id="+response+" onclick='supprimer(this.id);' type='bouton'class='btn btn-danger'>supprimer</bouton></td></tr>");
+		    		
+                },
+                error: function() {
+                	alert("Il y a un problème, désolé!");
+                }
+		});
+	}
+	function supprimer(id)
+	{
+		$.ajax
+		({
+		    type: "POST",
+			data: '&id='+ id,
+		    url: "http://localhost/site-visionnage/supprimeAnnot",
+		    success: function(response) {
+		    		$("#"+id).parent().parent().remove();	    		
                 },
                 error: function() {
                 	alert("Il y a un problème, désolé!");

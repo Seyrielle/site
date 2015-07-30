@@ -54,7 +54,7 @@ session_start();
 	})-> name('deconnexion');
 
 	$app->get('/fin', function () use ($app){
-		$app -> controllePages-> fin();
+		$app -> controllerPages-> fin();
 	})-> name('fin');
 
 	$app->post("/", function () use ($app){
@@ -63,25 +63,27 @@ session_start();
 		$app -> controllerUser -> connexion($password,$pseudo);
 	}) -> name('connexion');
 
-	$app->post('/annot', function() use ($app) {
+	$app->post('/ajoutAnnot', function() use ($app) {
        $req = $app->request();
        $app -> controllerAnnot -> envoyerAnnot($req);
+    });
+    $app->post('/supprimeAnnot', function() use ($app) {
+       $req = $app->request();
+       echo 'ok';
     });
 
 	$app->post("/inscription", function () use ($app){
     	$insc = $app->request->post();
-    	$app -> controllerVideo -> newVideo();
 		$app -> controllerUser -> inscription($insc);
 	});
 
 	$app->post("/questionnaire", function () use ($app){
     	$info = $app->request->post();
-    	$_SESSION['page'] = 1;
 		$app -> controllerQuestionnaire -> envoyerReponse($info);
+		$app -> controllerVideo -> newVideo();
 	});
 
 // execution Slim
-	$app -> render('header.html');
 	$app -> run();
 ?>
 

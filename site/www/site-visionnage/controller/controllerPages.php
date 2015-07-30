@@ -23,25 +23,29 @@
 			return false;
 		}
 		function changementPage($numPage){
-				if ($this->estConnecte())
+			$this->app->render('header.html');
+			if ($this->estConnecte())
+			{
+				if(abs($_SESSION['page'] - $numPage) > 1 || ($_SESSION['page'] == 3 && $numPage < 3))
 				{
-					if(abs($_SESSION['page'] - $numPage) > 1 || ($_SESSION['page'] == 3 && $numPage < 3))
-					{
-						$this->app->redirect($this->app->urlFor($this->nomPage($_SESSION['page'])));
-					}
-					else{
-						$_SESSION['page']=$numPage;
-						$this->app->controllerUser->saveNumPage();
-						$this->app->render($this->nomPage($numPage).".html",$this->var);
-					}
+
+					$this->app->redirect($this->app->urlFor($this->nomPage($_SESSION['page'])));
 				}
 				else{
-					$this->app->flash('etat_co',"Vous n'êtes pas connecté , connectez-vous");
-            		$this->app->redirect($this->app->urlFor('accueil'));
-				}	
+
+					$_SESSION['page']=$numPage;
+					$this->app->controllerUser->saveNumPage();
+					$this->app->render($this->nomPage($numPage).".html",$this->var);
+				}
+			}
+			else{
+				$this->app->flash('etat_co',"Vous n'êtes pas connecté , connectez-vous");
+	    		$this->app->redirect($this->app->urlFor('accueil'));
+			}	
 		}
 		function accueil(){
 			if (!$this->estConnecte()){
+				$this->app->render('header.html');
 				$this->app->render('accueil.html',array('app' => $this->app));
 			}
 			else{
@@ -55,6 +59,7 @@
 		}
 		function inscription(){
 			if (!$this->estConnecte()){
+				$this->app->render('header.html');
 				$this->app->render('inscription.html',array('app' => $this->app));
 			}
 			else{

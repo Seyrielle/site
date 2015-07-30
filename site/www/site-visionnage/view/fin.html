@@ -1,0 +1,27 @@
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="container">
+	<div class="row text-center"id="titre">
+		<?php include('infoCo.html'); ?>
+		<div class="span6 offset3" >
+			<h1>Merci <?php echo $_SESSION['pseudo'];?></h1>
+		</div>
+	</div>
+	<p class="text-center"><font face="Georgia" color="black" size="4">
+		Merci d'avoir participé à cette expérience <?php echo $_SESSION['pseudo'] ?>, vos réponses seront utilisé afin de poursuivre l'analyse des vidéo. <br>
+		Puisqu'il ne reste plus de vidéos à annoter, vous pouvez des à présent partager le lien du site à vos amis facebook ou bien choisir de vous déconnecter. <br> 
+		</font>
+	</p><br>
+	<div class="row text-center"id="partage">	
+		Faites partager le lien à vos amis : <br><br>
+		<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
+	</div>
+</div> 
+</body>

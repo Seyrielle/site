@@ -16,7 +16,7 @@ class ControllerQuestionnaire
         $questionnaire->comportement = $info['comportement'];
         $questionnaire->sens = $info['sens'];
         $questionnaire->id_user = $_SESSION['id_user'];
-        $questionnaire->id_user = $_SESSION['video'];
+        $questionnaire->id_video = $_SESSION['id_video'];
         $questionnaire->agent = $info['agent'];
         $questionnaire->save();
     }

@@ -10,12 +10,12 @@ class Controllerannot
  	}
     public function envoyerAnnot($info){
         try{
-            $annotation = new annotation;
-            $annotation->id_user = $_SESSION['id_user'];
-            $annotation->id_video= $_SESSION['id_video'];
-            $annotation->currentTime = $info->post('currentTime');
-            $annotation->name = $info->post('nom');
-            $annotation->save();
+            $annotation = annotation::create(array(
+            'id_user' => $_SESSION['id_user'],
+            'id_video'=> $_SESSION['id_video'],
+            'currentTime' => $info->post('currentTime'),
+            'name' => $info->post('nom')));       
+            echo $annotation->id;
         }catch(\Exception $e){
             echo $e;
         }
@@ -24,10 +24,8 @@ class Controllerannot
         $tab = "";
         $annotations = annotation::where('id_user',"=",$_SESSION['id_user'])->get();
         foreach ($annotations as $annotation){
-            echo 'ok';
-            $tab = $tab."<tr><td class='col-xs-4'>".$annotation->name."</td><td class='col-xs-4'>".$annotation->currentTime."</td><td class='col-xs-4'><a type='bouton'class='btn'>supprimer</a></td></tr>";
+            $tab = $tab."<tr><td class='col-xs-4'>".$annotation->name."</td><td class='col-xs-4'>".$annotation->currentTime."</td><td class='col-xs-4'><bouton id=".$annotation->id_annot." onclick='supprimer(this.id);' type='bouton'class='btn btn-danger'>supprimer</bouton></td></tr>";
         }
-        echo $tab;
         return $tab;
     }
     public function supprimerAnnot($info){}

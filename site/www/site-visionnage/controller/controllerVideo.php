@@ -21,9 +21,11 @@ class Controllervideo
 				$questionnaire = Video::find($video->id_video)->questionnaire()->where('id_user', '=', $_SESSION['id_user'])->firstorFail();
 			}catch(\Exception $e){
 				$_SESSION['id_video'] = $video->id_video;
-				return true;
+				$_SESSION['page'] = 4;
+				$this->app->redirect($this->app->urlFor('remerciement'));
 			}
 		}
+		$_SESSION['page'] = 5;
 		$this->app->redirect($this->app->urlFor('fin'));
  		
  	}

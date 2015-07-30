@@ -23,16 +23,16 @@ class ControllerUser
             if(!$this->verify($password, $user->password)) {
                 throw new Exception();
             }
-            $_SESSION['pseudo'] = $pseudo;
-            $_SESSION['id_user'] = $user->id_user;
-            $_SESSION['page'] = 1;
-            $_SESSION['id_video'] = $user->id_video;
-            $this->app->flash('etat_co',"Vous êtes connnecté");
-            $this->app->redirect($this->app->urlFor('consigne'));
         }catch(\Exception $e){
             $this->app->flash('etat_co',"Mauvais identifiant");
             $this->app->redirect($this->app->urlFor('accueil'));
         }
+        $_SESSION['pseudo'] = $pseudo;
+        $_SESSION['id_user'] = $user->id_user;
+        $_SESSION['page'] = $user->num_page;
+        $_SESSION['id_video'] = $user->id_video;
+        $this->app->flash('etat_co',"Vous êtes connnecté");
+        $this->app->redirect($this->app->urlFor('consigne'));
     }
     public function inscription($info){
         $user = User::firstOrNew(array('pseudo' => $info['pseudo']));
@@ -43,9 +43,9 @@ class ControllerUser
         else{
             $hash = $this->generateHash($info['password']) ;
             $user->password = $hash;
-            $user->num_page = 0;
+            $user->num_page = 1;
             $user -> age = $info['age'];
-            $user->id_video = $_SESSION['id_video'];
+            $user->id_video = 1;
             $user->save();
             $this->app->flash('etat_co',"Vous êtes inscrit, connectez-vous");
             $this->app->redirect($this->app->urlFor('accueil'));
@@ -65,6 +65,7 @@ class ControllerUser
     public function video(){
         $user = User::find($_SESSION['id_user']);
         $user->id_video = $_SESSION['id_video'];
+        $user -> save();
     }
 }
 
