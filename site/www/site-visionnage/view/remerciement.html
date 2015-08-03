@@ -11,11 +11,23 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="container">
 	<div class="row text-center"id="titre">
+		<?php include('infoCo.html'); ?>
 		<div class="span6 offset3" >
 			<h1>Merci <?php echo $_SESSION['pseudo'];?></h1>
 		</div>
 	</div>
+	<p class="text-center"><font face="Georgia" color="black" size="4">
+		Merci d'avoir participé annoter cette vidéo, vous pouvez des à présent annoter la vidéo suivante en appyant sur le bouton en dessous ou bien partager ce lien à vos amis facebook !<br> <br> 
+		</font>
+	</p><br>
+	<div class="row">
+			<div class="col-md-offset-5 col-md-1">
+				<?php echo $_SESSION['id_video'];?>
+				<button href="<?php echo $app->urlFor('consigne');?>" class="btn btn-primary">Envoyez mes réponses</button>
+			</div>
+		</div>
 	<div class="row text-center"id="partage">	
+		Faites partager le lien à vos amis : <br><br>
 		<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
 	</div>
 </div> 

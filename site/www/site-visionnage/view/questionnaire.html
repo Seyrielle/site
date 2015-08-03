@@ -11,7 +11,7 @@
 	<div class="row text-center">
 		<ul id="breadcrumbs-two"  class="row text-center">
 		    <li><a class="before blocked">Consigne</a></li>
-		    <li><a class="before blocked">Visionnage</a></li>
+		    <li><a href = "<?php echo $app->urlFor('visionnage');?>"class="before">Visionnage</a></li>
 		    <li><a class="current">Questionnaire</a></li>
 		</ul>
 	</div>
@@ -32,18 +32,49 @@
 				    </div>
 				</div>
 		</div></br>
+
 		<div class="row">
 				<div class="form-group">
-					<label for="sel1">L'interraction entre le participant et la lampe vous semble t'elle difficile?</label></br>
+					<label for="sel1">Diriez-vous qu'il y a eu interaction entre le sujet et la lampe?</label></br>
 					<div class="col-md-3">
-				      <select name="interraction"class="form-control" id="sel1">
-				        <option value="1">1(très facile)</option>
+				      <select name="interaction"class="form-control" id="sel1">
+				        <option value="1">non</option>
+				        <option value="2">plutôt non</option>
+				        <option value="3">plutôt oui</option>
+				        <option value="4">oui</option>
+				      </select>
+				    </div>
+				</div>
+		</div></br>
+		<div class="row">
+				<label for="nature_int">Comment qualifieriez-vous la nature de cette interaction?</label>
+				<div class="radio">
+	              <label>
+	                <input name="nature_int" type="radio" value="coop" checked>
+	                coopérative
+	              </label>
+	              <label>
+	                <input name="nature_int" type="radio" value="non_comp">
+	                non compétitive
+	              </label>
+	              <label>
+	                <input name="nature_int" type="radio" value="comp">
+	                compétitive
+	              </label>
+           		 </div>
+		</div></br>
+		<div class="row">
+				<div class="form-group">
+					<label for="sel1">L'interaction entre le participant et la lampe vous semble t'elle laborieuse?</label></br>
+					<div class="col-md-3">
+				      <select name="interaction"class="form-control" id="sel1">
+				        <option value="1">1(très peu laborieuse)</option>
 				        <option value="2">2</option>
 				        <option value="3">3</option>
 				        <option value="4">4</option>
 				        <option value="5">5</option>
 				        <option value="6">6</option>
-				        <option value="7">7(très difficile)</option>
+				        <option value="7">7(très laborieuse)</option>
 				      </select>
 				    </div>
 				</div>
@@ -70,7 +101,7 @@
 				<label for="age">Selon vous quel type d'agent était aux commandes de la lampe?</label>
 				<div class="radio">
 	              <label>
-	                <input name="agent" type="radio" value="H">
+	                <input name="agent" type="radio" value="H" checked>
 	                Agent humain aux commandes
 	              </label>
 	              <label>

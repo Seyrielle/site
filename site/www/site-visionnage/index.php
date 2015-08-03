@@ -69,7 +69,7 @@ session_start();
     });
     $app->post('/supprimeAnnot', function() use ($app) {
        $req = $app->request();
-       echo 'ok';
+       $app -> controllerAnnot -> supprimerAnnot($req);
     });
 
 	$app->post("/inscription", function () use ($app){

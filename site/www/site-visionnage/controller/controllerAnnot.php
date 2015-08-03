@@ -15,7 +15,7 @@ class Controllerannot
             'id_video'=> $_SESSION['id_video'],
             'currentTime' => $info->post('currentTime'),
             'name' => $info->post('nom')));       
-            echo $annotation->id;
+             echo $annotation->id_annot;
         }catch(\Exception $e){
             echo $e;
         }
@@ -28,7 +28,14 @@ class Controllerannot
         }
         return $tab;
     }
-    public function supprimerAnnot($info){}
+    public function supprimerAnnot($id){
+        try{  
+            $annotation = annotation::find($id->post('id'))->first();
+            $annotation -> delete();
+        }catch(\Exception $e){
+            echo $e;
+        }
+    }
 }
 
 ?>

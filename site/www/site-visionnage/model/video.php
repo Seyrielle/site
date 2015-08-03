@@ -7,6 +7,9 @@ class video extends Illuminate\Database\Eloquent\Model {
     public $primaryKey = 'id_video';
     public function questionnaire()
     {
-        return $this->hasOne('Questionnaire','id_video','id_video');
+        return $this->hasOne('questionnaire','id_video','id_video');
+    }
+    public function image(){
+    	return $this->hasMany('image_solution_video','id_video','id_video');
     }
 }

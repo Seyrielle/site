@@ -1,3 +1,10 @@
+#texte{
+  font-family:Georgia;
+  color:black ;
+  font-size:15px;
+}
+
+
 /*accueil*/
 #etat{
 	color: red;
@@ -250,4 +257,10 @@ ul{
 .table-fixed tbody td, .table-fixed thead > tr> th {
   float: left;
   border-bottom-width: 0;
+}
+img{
+  width:250px;
+  height:250px;
+  margin-left : 40px;
+  margin-top: 20px;
 }

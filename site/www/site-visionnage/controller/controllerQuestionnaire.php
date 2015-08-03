@@ -12,13 +12,14 @@ class ControllerQuestionnaire
         $questionnaire = new questionnaire;
         $questionnaire->confiance = $info['confiance'];
         $questionnaire->intelligence = $info['intelligence'];
-        $questionnaire->interraction = $info['interraction'];
+        $questionnaire->interraction = $info['interaction'];
         $questionnaire->comportement = $info['comportement'];
         $questionnaire->sens = $info['sens'];
         $questionnaire->id_user = $_SESSION['id_user'];
         $questionnaire->id_video = $_SESSION['id_video'];
         $questionnaire->agent = $info['agent'];
         $questionnaire->save();
+        
     }
 }
 ?>
