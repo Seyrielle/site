@@ -28,16 +28,19 @@
 			$this->app->render('header.html');
 			if ($this->estConnecte())
 			{
-				if ($numPage==1 || $numPage==2 || $numPage == 3 || $numPage == $_SESSION['page']){
+				if ($numPage==1 || $numPage==2 || $numPage == 3 and $_SESSION['page'] != 5){
 					$_SESSION['page']=$numPage;
 					$this->app->controllerUser->saveNumPage();
+					$this->app->render($this->nomPage($numPage).".html",$this->var);
+				}
+				else if($numPage == $_SESSION['page']){
 					$this->app->render($this->nomPage($numPage).".html",$this->var);
 				}
 				else{
 					$this->app->redirect($this->app->urlFor($this->nomPage($_SESSION['page'])));
 				}
 			}
-			else if(!$this->estConnecte()){
+			else{
 				if ($numPage == 0 || $numPage == 6){
 					$this->app->render($this->nomPage($numPage).".html",$this->var);
 				}

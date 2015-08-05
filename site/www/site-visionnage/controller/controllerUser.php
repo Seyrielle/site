@@ -35,22 +35,26 @@ class ControllerUser
         $this->app->redirect($this->app->urlFor('consigne'));
     }
     public function inscription($info){
-        $user = User::firstOrNew(array('pseudo' => $info['pseudo']));
-        if(isset($user->password)){
-            $this->app->flash('etat_co',"Ce pseudo existe déjà !");
+        if ($info['password']==$info['vpassword']){
+            $user = User::firstOrNew(array('pseudo' => $info['pseudo']));
+            if(isset($user->password)){
+                $this->app->flash('etat_co',"Ce pseudo existe déjà !");
+                $this->app->redirect($this->app->urlFor('inscription'));
+            }
+            else{
+                $hash = $this->generateHash($info['password']) ;
+                $user->password = $hash;
+                $user->num_page = 1;
+                $user -> age = $info['age'];
+                $user->id_video = 1;
+                $user->save();
+                $this->app->flash('etat_co',"Vous êtes inscrit, connectez-vous");
+                $this->app->redirect($this->app->urlFor('accueil'));
+            }
+        }else{
+            $this->app->flash('etat_co',"Les mots de passe ne correspondent pas!");
             $this->app->redirect($this->app->urlFor('inscription'));
         }
-        else{
-            $hash = $this->generateHash($info['password']) ;
-            $user->password = $hash;
-            $user->num_page = 1;
-            $user -> age = $info['age'];
-            $user->id_video = 1;
-            $user->save();
-            $this->app->flash('etat_co',"Vous êtes inscrit, connectez-vous");
-            $this->app->redirect($this->app->urlFor('accueil'));
-        }
-        
     }
     public function saveNumPage(){
         $user = User::find($_SESSION['id_user']);

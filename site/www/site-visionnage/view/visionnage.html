@@ -20,7 +20,7 @@
 		$("#jquery_jplayer_1").jPlayer({
 			ready: function () {
 				$(this).jPlayer("setMedia", {
-					title: "Big Buck Bunny",
+					title: "",
 					rtmpv: "<?php echo $tab['url']; ?>",
 				});
 			},
@@ -49,19 +49,32 @@
 	});
 	function envoi(nom)
 	{
-	    var currentTime = $('#jquery_jplayer_1').data("jPlayer").status.currentTime;
-		$('#succes').text("Vous avez été supris a : " + currentTime + " s");
+	    var currentTime = $.jPlayer.convertTime($('#jquery_jplayer_1').data("jPlayer").status.currentTime);
 		$.ajax
 		({
 		    type: "POST",
 			data: '&nom='+ nom +'&currentTime=' + currentTime,
 		    url: "http://localhost/site-visionnage/ajoutAnnot",
 		    success: function(response) {
-		    		$('tbody').append("<tr ><td class='col-xs-4'>"+nom+"</td><td class='col-xs-4'>"+currentTime+"</td><td class='col-xs-4'><bouton id="+response+" onclick='supprimer(this.id);' type='bouton'class='btn btn-danger'>supprimer</bouton></td></tr>");
+		    	var element = "<tr ><td class='col-xs-4'>"+nom+"</td><td class='time col-xs-4'>"+currentTime+":00"+"</td><td class='col-xs-4'><bouton id="+response+" onclick='supprimer(this.id);' type='bouton'class='btn btn-danger'>supprimer</bouton></td></tr>";
+		    	if($('.time').length){
+			    	$('.time').each(function() {
+				       if($(this).html() > currentTime){
+				       		$(this).parent().before(element);
+				       		var ok = true;
+				       		return false;
+				       }
+				         
+				    });
+				    if(typeof ok == undefined){$('tbody').append(element);}
+				}else{
+					alert("ok");
+					$('tbody').append(element);
+				}
 		    		
                 },
                 error: function() {
-                	alert("Il y a un problème, désolé!");
+                	alert("Il y a un problème, désolé! Essayez de recharger la page!");
                 }
 		});
 	}
@@ -76,7 +89,7 @@
 		    		$("#"+id).parent().parent().remove();	    		
                 },
                 error: function() {
-                	alert("Il y a un problème, désolé!");
+                	alert("Il y a un problème, désolé! Essayez de recharger la page !");
                 }
 		});
 	}
@@ -84,15 +97,15 @@
 	//]]>
 	</script>
 	<p id="texte" class="row text-center">
-		Vous êtes arrivé à l'étape d'annotation de vidéos, le but de cette étape est de regarder la video et de l'annoter. L'annotation se fait en appuyant sur les boutons se trouvant à droite de la vidéo. Les différentes annotations seront ensuite visibles dans le tableau se trouvant en dessous de la vidéo. Vous pouvez choisir de supprimer vos annotations si vous changez d'avis, le tableau comporte le nom du bouton sur lequel vous avez appuyé, le moment où vous avez appuyé sur ce bouton, et un bouton pour supprimer l'annotation si vous souhaitez effectuer une modification. Annotez uniquement lorsque cela vous semble necessaire. Une fois la phase d'annotation terminée, vous pouvez passer à l'étape du questionnaire. Il ne vous sera plus possible de revenir à l'étape du visionnage avant d'avoir terminé le questionnaire. <br><br>
-		 La vidéo montre un participant réalisant une figure du tangram. Il doit placer les pièces de manière à reproduire la figure solution qui se trouve à droite de la vidéo. Il peut réaliser jusque 8 figures. Cette image changera si le participant passe à l'image suivante. Les boutons correspondent à différentes réactions du participant. Regardez attentivement la vidéo et appuyez sur le bouton correspondant si vous jugez qu'il manifeste l'un ou l'autre des comportements. 
-		Voici les consignes pour chaque boutons : <br><br>
+		Vous êtes arrivé à l'étape d'annotation de vidéos, le but de cette étape est de regarder la video et de l'annoter. L'annotation se fait en appuyant sur les boutons se trouvant à droite de la vidéo. Les différentes annotations seront ensuite visibles dans le tableau se trouvant en dessous de la vidéo. Vous pouvez choisir de supprimer vos annotations si vous changez d'avis, le tableau comporte le nom du bouton sur lequel vous avez appuyé, le moment où vous avez appuyé sur ce bouton, et un bouton pour supprimer l'annotation si vous souhaitez effectuer une modification. Annotez uniquement lorsque cela vous semble nécessaire. Une fois la phase d'annotation terminée, vous pouvez passer à l'étape du questionnaire. Il ne vous sera plus possible de revenir à l'étape du visionnage avant d'avoir terminé le questionnaire. <br><br>
+		 La vidéo montre un participant réalisant une figure du tangram. Il doit placer les pièces de manière à reproduire la figure solution qui se trouve à droite de la vidéo. Il peut réaliser jusque 8 figures. Cette image changera si le participant passe à l'image suivante. Les boutons correspondent à différentes réactions du participant. Regardez attentivement la vidéo et appuyez sur le bouton correspondant si vous jugez qu'il manifeste l'un ou l'autre des comportements.
+		Voici les consignes pour chaque boutons. Il y a deux catégories, la première concerne les interractions entre la lampe et le sujet, la deuxième concerne les émotions du sujet.<br><br>
 		<ul id="texte"class="text-center list-group">
 			<li class="list-group-item">Cliquez sur le bouton « AIDE » à chaque fois que le sujet semble s’aider de la lampe dans la résolution du tangram</li>
 			<li class="list-group-item">Cliquez sur le bouton « ATTENTIF » à chaque fois que le sujet semble prêter une attention particulière à la lampe</li>
-			<li class="list-group-item">Cliquez sur un des boutons relatifs aux différentes émotions à chaque fois que le sujet manifeste une émotion particulière en réaction au comportement de la lampe (« JOIE », « COLERE », « DEGOUT », « SURPRISE »)</li>
 			<li class="list-group-item">Cliquez sur le bouton « LAMPE GENANTE » à chaque fois que le comportement de la lampe semble gêner le sujet</li>
 			<li class="list-group-item">Cliquez sur le bouton « LAMPE AIDANTE » à chaque fois que le comportement de la lampe semble s'ajuster au comportement du sujet dans le but de l'aider</li>
+			<li class="list-group-item">Cliquez sur un des boutons relatifs aux différentes émotions à chaque fois que le sujet manifeste une émotion particulière en réaction au comportement de la lampe (« JOIE », « COLERE », « DEGOUT », « SURPRISE »)</li>
 		</ul><br>
 	</p>
 	<div class="row text-center">
@@ -151,7 +164,7 @@
 			<a id="emotion" onclick="envoi('joie');" name="joie"class="btn-md btn btn-success">JOIE</a>
 			<a id="emotion" onclick="envoi('dégout');" name="dégout"class="btn-md btn btn-primary">DEGOUT</a>
 			<a id="emotion" onclick="envoi('colere');" name="colere"class="btn-md btn btn-danger">COLERE</a>
-			<a id="emotion" onclick="envoi('surprise');" name="surprise"class="btn-md btn btn-danger">SUPRISE</a>
+			<a id="emotion" onclick="envoi('surprise');" name="surprise"class="btn-md btn btn-warning">SURPRISE</a>
 		</div>
 		<div id="image" class="col-md-5"/></div>
 	</div>
