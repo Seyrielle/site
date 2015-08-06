@@ -2,6 +2,9 @@
 
 <body>
 <div id="fb-root"></div>
+
+
+<!-- Script pour le bouton facebook -->
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -9,6 +12,8 @@
   js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.4";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+
+
 <div class="container">
 	<div class="row text-center"id="titre">
 		<?php include('infoCo.html'); ?>
@@ -17,16 +22,18 @@
 		</div>
 	</div>
 	<p class="text-center"><font face="Georgia" color="black" size="4">
-		Merci d'avoir participé annoter cette vidéo, vous pouvez des à présent annoter la vidéo suivante en appyant sur le bouton en dessous ou bien partager ce lien à vos amis facebook !<br> <br> 
+		Merci d'avoir annoté cette vidéo, vous pouvez des à présent annoter la vidéo suivante en appuyant sur le bouton en dessous ou bien partager ce lien à vos amis facebook !<br> <br> 
 		</font>
 	</p><br>
 	<div class="row">
 			<div class="col-md-offset-5 col-md-1">
+				<!-- Lorsqu'on arrive sur cette page, on est redirigé vers les consignes pour annoter une nouvelle vidéo ! Si la personne n'a plus de vidéo a annoté, elle est dirigé vers une autre personne-->
 				<a href="<?php echo $app->urlFor('consigne');?>" class="btn btn-primary">Annoter une nouvelle vidéo</a>
 			</div>
 		</div>
 	<div class="row text-center"id="partage">	
 		Faites partager le lien à vos amis : <br><br>
+		<!-- Bouton facebook, il faut mettre le lien du site ! -->
 		<div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
 	</div>
 </div> 

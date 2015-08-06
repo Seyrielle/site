@@ -7,14 +7,21 @@
 		</div>
 	</div>
 	<div class="row text-center">
-		<ul id="breadcrumbs-two"  class="row text-center">
+		<ul id="breadcrumbs-two"  class="row text-center">  
+
+			<!-- menu -->
+
 		    <li><a href="<?php echo $app->urlFor('consigne');?>" class="before">Consigne</a></li>
 		    <li><a href="" class="current">Visionnage</a></li>
 		    <li><a href="<?php echo $app->urlFor('questionnaire');?>"class="after">Questionnaire</a></li>
 		</ul>
 	</div>
+
 	<script type="text/javascript">
 	//<![CDATA[
+
+	// code javascript pour lecteur
+
 	$(document).ready(function(){
 
 		$("#jquery_jplayer_1").jPlayer({
@@ -24,13 +31,21 @@
 					rtmpv: "<?php echo $tab['url']; ?>",
 				});
 			},
+			// Affichage de l'image
+
 			timeupdate : function (event){
-				if (event.jPlayer.status.currentTime > "<?php echo $tab[1]['temps']; ?>") {
-     				$('#image').html("<img src=image/<?php echo $tab[1]['nom']; ?>>");
+				var image = "";
+				// Le nom de l'image est recuperé depuis un tableau envoyé dans le controllerPage
+				// si le temps est supérieur à celui où la deuxième image doit s'afficher et que l'image qui doit être affiché n'est pas affiché, on l'affiche, sinon on affiche la première image
+				if (event.jPlayer.status.currentTime > "<?php echo $tab[1]['temps']; ?>" && image != "<?php echo $tab[1]['nom']; ?>") {
+     				image = "<?php echo $tab[1]['nom']; ?>";
+     				$('#image').html("<img src=image/"+image+">");
   				}
   				else{
-  					$('#image').html("<img src=image/<?php echo $tab[0]['nom']; ?>>");
+  					image = "<?php echo $tab[0]['nom']; ?>";
+  					$('#image').html("<img src=image/"+image+">");
   				}
+  				
 			},
 			swfPath: "dist/jplayer",
 			supplied: "rtmpv",
@@ -47,29 +62,36 @@
 			toggleDuration: true
 		});
 	});
-	function envoi(nom)
+
+	// code javascript pour les annotations
+
+	function envoi(nom) //envoyer les annotations
 	{
-	    var currentTime = $.jPlayer.convertTime($('#jquery_jplayer_1').data("jPlayer").status.currentTime);
+	    var currentTime = $.jPlayer.convertTime($('#jquery_jplayer_1').data("jPlayer").status.currentTime); // La position actuel de la personne sur la vidéo
 		$.ajax
-		({
+		({ // On envoie au serveur le nom de l'annotation et la position
 		    type: "POST",
 			data: '&nom='+ nom +'&currentTime=' + currentTime,
-		    url: "http://localhost/site-visionnage/ajoutAnnot",
+		    url: "http://localhost/site-visionnage/ajoutAnnot", // traité par index.php
 		    success: function(response) {
+		    	// Ensuite on ajoute l'élément dans le tableau html
 		    	var element = "<tr ><td class='col-xs-4'>"+nom+"</td><td class='time col-xs-4'>"+currentTime+":00"+"</td><td class='col-xs-4'><bouton id="+response+" onclick='supprimer(this.id);' type='bouton'class='btn btn-danger'>supprimer</bouton></td></tr>";
+		    	
+
 		    	if($('.time').length){
+		    		var ok=false;
+		    		// on examine chaque élément du tableau pour placer l'annotation en fonction de la position
 			    	$('.time').each(function() {
 				       if($(this).html() > currentTime){
-				       		$(this).parent().before(element);
-				       		var ok = true;
+				       		$(this).parent().before(element); // Si on trouve une annotation avec une position plus grande, on place l'annotation avant
+				       		ok = true;
 				       		return false;
 				       }
 				         
 				    });
-				    if(typeof ok == undefined){$('tbody').append(element);}
+				    if(ok == false){alert('ok');$('tbody').append(element);} // Sinon on place l'élément à la fin
 				}else{
-					alert("ok");
-					$('tbody').append(element);
+					$('tbody').append(element); // s'il n'y a pas d'élément dans le tableau on le place juste
 				}
 		    		
                 },
@@ -78,7 +100,7 @@
                 }
 		});
 	}
-	function supprimer(id)
+	function supprimer(id) // Pour supprimer un élément
 	{
 		$.ajax
 		({
@@ -94,8 +116,9 @@
 		});
 	}
 
-	//]]>
+	//]]> 
 	</script>
+	<!-- Consigne -->
 	<p id="texte" class="row text-center">
 		Vous êtes arrivé à l'étape d'annotation de vidéos, le but de cette étape est de regarder la video et de l'annoter. L'annotation se fait en appuyant sur les boutons se trouvant à droite de la vidéo. Les différentes annotations seront ensuite visibles dans le tableau se trouvant en dessous de la vidéo. Vous pouvez choisir de supprimer vos annotations si vous changez d'avis, le tableau comporte le nom du bouton sur lequel vous avez appuyé, le moment où vous avez appuyé sur ce bouton, et un bouton pour supprimer l'annotation si vous souhaitez effectuer une modification. Annotez uniquement lorsque cela vous semble nécessaire. Une fois la phase d'annotation terminée, vous pouvez passer à l'étape du questionnaire. Il ne vous sera plus possible de revenir à l'étape du visionnage avant d'avoir terminé le questionnaire. <br><br>
 		 La vidéo montre un participant réalisant une figure du tangram. Il doit placer les pièces de manière à reproduire la figure solution qui se trouve à droite de la vidéo. Il peut réaliser jusque 8 figures. Cette image changera si le participant passe à l'image suivante. Les boutons correspondent à différentes réactions du participant. Regardez attentivement la vidéo et appuyez sur le bouton correspondant si vous jugez qu'il manifeste l'un ou l'autre des comportements.
@@ -108,6 +131,8 @@
 			<li class="list-group-item">Cliquez sur un des boutons relatifs aux différentes émotions à chaque fois que le sujet manifeste une émotion particulière en réaction au comportement de la lampe (« JOIE », « COLERE », « DEGOUT », « SURPRISE »)</li>
 		</ul><br>
 	</p>
+
+	 <!-- le lecteur -->
 	<div class="row text-center">
 		<div id="video" class="col-md-8">
 			<div id="jp_container_1" class="jp-video jp-video-360p" role="application" aria-label="media player">
@@ -154,6 +179,9 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- les boutons d'annotations -->
+
 		<div id="bouton" class="col-md-4">
 			<h5> Interaction : </h5>
 			<button type="button" onclick="envoi('aide');" name="aide"class="btn-md btn btn-info">AIDE</button>
@@ -170,6 +198,7 @@
 	</div>
 	<div class="row">	
 		<div class="col-md-8 liste_annot">
+			<!-- tableau contenant les annotations -->
 			<table class="table table-fixed">
 		          <thead>
 		            <tr>
@@ -177,6 +206,7 @@
 		            </tr>
 		          </thead>
 		          <tbody>
+		          	<!-- liste d'annotations envoyées par le controller de page -->
 		            <?php echo $annot;?>
 		          </tbody>
 		    </table>

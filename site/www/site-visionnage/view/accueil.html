@@ -19,6 +19,7 @@ Pour ce faire, il vous suffit de vous inscrire en appuyant sur le bouton « ins
 		<div class="col-sm-6 col-md-4 col-md-offset-4">
 			<h3 class="text-center login-title">Connectez-vous pour participer</h1>
 				<div class="account-wall">
+					<!-- la variable flash s'active si la personne a fait une erreur en se connectant ou si elle essaie d'acceder à une page accessible uniquement si en étant connecté ! -->
 						<div id='etat'><?php echo $flash['etat_co'];?></div>
 						<form class="form-signin"  action="" method= "post" >
 							<input type="text" name="pseudo" class="form-control" placeholder="pseudo" required autofocus>

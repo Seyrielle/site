@@ -3,7 +3,7 @@
 session_start();
 
 
-//require
+// declaration de Slim et de toutes les classes controller ainsi que le fichier de configuration de la base de données pour eloquent
 	require 'vendor/autoload.php';
 	require 'controller/controllerPages.php';
 	require 'controller/controllerUser.php';
@@ -12,9 +12,7 @@ session_start();
 	require 'controller/controllerAnnot.php';
 	include 'config/database.php'; 
 
-
-
-//Slim
+//configuration de Slim et instanciation des différentes classes
 
 	$tab = array('templates.path' => 'view');
 
@@ -24,7 +22,9 @@ session_start();
 	$app -> controllerQuestionnaire = new controllerQuestionnaire($app);
 	$app -> controllerAnnot = new ControllerAnnot($app);
 	$app -> controllerVideo = new ControllerVideo($app);
-//root
+
+//root, permet de traiter les différentes urls en attribuant les bons controller
+
 	$app->get('/', function () use ($app){
 		$app -> controllerPages-> accueil();
 	})-> name('accueil');
@@ -77,10 +77,10 @@ session_start();
 		$app -> controllerUser -> inscription($insc);
 	});
 
-	$app->post("/questionnaire", function () use ($app){
+	$app->post("/questionnaire", function () use ($app){ 
     	$info = $app->request->post();
-		$app -> controllerQuestionnaire -> envoyerReponse($info);
-		$app -> controllerVideo -> newVideo();
+		$app -> controllerQuestionnaire -> envoyerReponse($info); // en envoyant le questionnaire on envoie les reponses 
+		$app -> controllerVideo -> newVideo(); // et on attribue aussi une nouvelle vidéo
 	});
 
 // execution Slim
