@@ -11,7 +11,7 @@
 	<div class="row text-center">
 		<ul id="breadcrumbs-two"  class="row text-center">
 		    <li><a class="before blocked">Consigne</a></li>
-		    <li><a href = "<?php echo $app->urlFor('visionnage');?>"class="before">Visionnage</a></li>
+		    <li><a href = "<?php echo $app->urlFor('visionnage');?>"class="before">Annotation</a></li>
 		    <li><a class="current">Questionnaire</a></li>
 		</ul>
 	</div>
@@ -67,7 +67,7 @@
 				<div class="form-group">
 					<label for="sel1">L'interaction entre le participant et la lampe vous semble t'elle laborieuse ?</label></br>
 					<div class="col-md-3">
-				      <select name="interaction"class="form-control" id="sel1">
+				      <select name="interaction_lab"class="form-control" id="sel1">
 				        <option value="1">1(très peu laborieuse)</option>
 				        <option value="2">2</option>
 				        <option value="3">3</option>
@@ -113,7 +113,7 @@
 
 		<div class="row">
 				<div class="form-group">
-					<label for="comportement">Comment qualifieriez-vous les comportements de la lampe ?</label></br>
+					<label for="comportement">Comment décrieriez-vous les comportements de la lampe ?</label></br>
 					<div class="col-md-5">
 						<textarea class="form-control" rows=5 name="comportement" placeholder="" required ></textarea>
 					</div>
